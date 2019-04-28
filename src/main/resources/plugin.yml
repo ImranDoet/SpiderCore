@@ -1,0 +1,7 @@
+name: SpiderCore
+version: ${project.version}
+main: me.imrandoet.spidercore.SpiderCore
+api-version: 1.13
+authors: [ImranDoet]
+description: This is SpiderCore: the core you're gonna need in your life. It makes making spigot plugins easier!
+website: imrandoet.tech
