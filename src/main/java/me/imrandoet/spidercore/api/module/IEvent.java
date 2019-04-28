@@ -4,6 +4,6 @@ import org.bukkit.event.Event;
 
 public interface IEvent<T extends Event> {
 
-    public <T> void event(T event);
+    public void event(T event);
 
 }

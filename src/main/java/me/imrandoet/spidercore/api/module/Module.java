@@ -4,8 +4,6 @@ public abstract class Module {
 
     public abstract void run();
 
-
-
     public @interface ModulePriority {
 
         int priority() default DEFAULT;
