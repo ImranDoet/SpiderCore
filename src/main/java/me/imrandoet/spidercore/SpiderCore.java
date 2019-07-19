@@ -11,16 +11,16 @@ public class SpiderCore {
 
     private ModuleLoader moduleLoader;
 
-    SpiderCore(JavaPlugin javaPlugin, Package pack) {
+    private SpiderCore(JavaPlugin javaPlugin) {
         this.plugin = javaPlugin;
     }
 
-    public static void enable(JavaPlugin javaPlugin, Package pack) {
+    public static void enable(JavaPlugin javaPlugin) {
         if (instance == null) return;
 
-        instance = new SpiderCore(javaPlugin, pack);
+        instance = new SpiderCore(javaPlugin);
 
-        instance.enableCore(pack);
+        instance.enableCore();
     }
 
     public static void disable() {
@@ -38,7 +38,7 @@ public class SpiderCore {
         this.moduleLoader = new ModuleLoader(javaPlugin, package_);
     }
 
-    public void enableCore(Package pack) {
+    public void enableCore() {
         plugin.getLogger().info("Enabled SpiderCore!");
     }
 
