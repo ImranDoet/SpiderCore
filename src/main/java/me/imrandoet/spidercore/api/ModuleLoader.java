@@ -1,6 +1,5 @@
 package me.imrandoet.spidercore.api;
 
-import me.imrandoet.spidercore.SpiderCore;
 import me.imrandoet.spidercore.api.module.IDisableable;
 import me.imrandoet.spidercore.api.module.Module;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class ModuleLoader<T extends JavaPlugin> {
+public class ModuleLoader<T> {
 
     private final T javaPlugin;
 
