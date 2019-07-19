@@ -16,7 +16,7 @@ public class SpiderCore {
     }
 
     public static void enable(JavaPlugin javaPlugin) {
-        if (instance == null) return;
+        if (instance != null) return;
 
         instance = new SpiderCore(javaPlugin);
 
