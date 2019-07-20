@@ -2,7 +2,6 @@ package me.imrandoet.spidercore.api;
 
 import me.imrandoet.spidercore.api.module.IDisableable;
 import me.imrandoet.spidercore.api.module.Module;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
@@ -17,9 +16,9 @@ public class ModuleLoader<T> {
 
     private final Map<Class, Module> modules;
 
-    private final Package pluginPackage;
+    private final String pluginPackage;
 
-    public ModuleLoader(T javaPlugin, Package pluginPackage) {
+    public ModuleLoader(T javaPlugin, String pluginPackage) {
         this.javaPlugin = javaPlugin;
         this.modules = new HashMap<>();
         this.pluginPackage = pluginPackage;
@@ -50,7 +49,7 @@ public class ModuleLoader<T> {
     }
 
     private void scanForModules(Consumer<? super Class> consumer) {
-        Reflections reflections = new Reflections(pluginPackage.getName());
+        Reflections reflections = new Reflections(pluginPackage);
 
         Set<Class<? extends Module>> allClasses = reflections.getSubTypesOf(Module.class);
 
