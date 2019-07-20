@@ -34,7 +34,7 @@ public class SpiderCore {
         plugin.getLogger().info("Disabled SpiderCore!");
     }
 
-    public <T extends JavaPlugin> void moduleLoader(Package package_, T javaPlugin) {
+    public <T extends JavaPlugin> void moduleLoader(String package_, T javaPlugin) {
         this.moduleLoader = new ModuleLoader(javaPlugin, package_);
     }
 
