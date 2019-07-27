@@ -15,7 +15,7 @@ public class SpiderCore {
         this.plugin = javaPlugin;
     }
 
-    public SpiderCore enable(JavaPlugin javaPlugin) {
+    public static SpiderCore enable(JavaPlugin javaPlugin) {
         if (instance != null) return instance;
 
         instance = new SpiderCore(javaPlugin);
