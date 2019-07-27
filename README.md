@@ -1,2 +1,1 @@
-# SpiderCore
-SpiderCore is a(nother) spigot Core that makes your programming life a whole lot easier!
+[![](https://jitpack.io/v/ImranDoet/SpiderCore.svg)](https://jitpack.io/#ImranDoet/SpiderCore)
