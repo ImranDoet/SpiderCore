@@ -24,8 +24,8 @@ public abstract class Module<T extends JavaPlugin> {
 
         int priority() default DEFAULT;
 
-        int HIGHEST = 10;
-        int DEFAULT = 5;
+        int HIGHEST = 3;
+        int DEFAULT = 2;
         int LOWEST = 1;
 
     }

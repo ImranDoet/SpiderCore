@@ -33,9 +33,9 @@ public class ModuleLoader<T> {
 
                 modules.put(clazz, module);
 
-                module.run();
             } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException exception) {
                 //Custom logging system
+                exception.printStackTrace();
             }
         });
     }

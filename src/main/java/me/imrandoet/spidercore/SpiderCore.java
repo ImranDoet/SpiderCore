@@ -15,12 +15,14 @@ public class SpiderCore {
         this.plugin = javaPlugin;
     }
 
-    public static void enable(JavaPlugin javaPlugin) {
-        if (instance != null) return;
+    public SpiderCore enable(JavaPlugin javaPlugin) {
+        if (instance != null) return instance;
 
         instance = new SpiderCore(javaPlugin);
 
         instance.enableCore();
+
+        return instance;
     }
 
     public static void disable() {
