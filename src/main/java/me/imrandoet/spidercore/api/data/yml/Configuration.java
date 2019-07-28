@@ -21,14 +21,14 @@ public class Configuration extends YamlConfiguration {
 
     public Configuration(JavaPlugin javaPlugin, String configName) {
         this.javaPlugin = javaPlugin;
-        this.configName = configName;
-        this.fileConfiguration = new File(javaPlugin.getDataFolder(), configName.concat(".yml"));
+        this.configName = configName.concat(".yml");
+        this.fileConfiguration = new File(javaPlugin.getDataFolder(), configName);
         reload();
     }
 
     public Configuration(JavaPlugin javaPlugin, String configName, String defaultConfig) {
         this(javaPlugin, configName);
-        this.defaultConfig = defaultConfig;
+        this.defaultConfig = defaultConfig.concat(".yml");
     }
 
     public void reload() {
