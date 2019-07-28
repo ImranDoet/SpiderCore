@@ -40,7 +40,7 @@ public class ModuleLoader<T> {
         });
     }
 
-    private void disableModules() {
+    public void disableModules() {
         modules.values().forEach(module -> {
             if (module.getClass().isAssignableFrom(IDisableable.class)) {
                 ((IDisableable) module).disable();
