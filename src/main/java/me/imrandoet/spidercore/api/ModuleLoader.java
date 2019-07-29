@@ -1,9 +1,9 @@
 package me.imrandoet.spidercore.api;
 
 import me.imrandoet.spidercore.api.module.IDisableable;
-import me.imrandoet.spidercore.api.module.IEvent;
 import me.imrandoet.spidercore.api.module.Module;
 import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.reflections.Reflections;
 
@@ -36,9 +36,11 @@ public class ModuleLoader<T> {
 
                 modules.put(clazz, module);
 
-                if (module instanceof IEvent) {
-                    Bukkit.getPluginManager().registerEvents((IEvent) module, (JavaPlugin) javaPlugin);
-                }
+                module.getEvents().forEach(o -> Bukkit.getPluginManager().registerEvents((Listener) o, (JavaPlugin) javaPlugin));
+
+//                if (module instanceof IEvent) {
+//                    Bukkit.getPluginManager().registerEvents((IEvent) module, (JavaPlugin) javaPlugin);
+//                }
 
             } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException exception) {
                 //Custom logging system
@@ -60,7 +62,7 @@ public class ModuleLoader<T> {
 
         Set<Class<? extends Module>> allClasses = reflections.getSubTypesOf(Module.class);
 
-        for (Class clazz : allClasses) {
+        for (Class<? extends Object> clazz : allClasses) {
             consumer.accept(clazz);
         }
     }
