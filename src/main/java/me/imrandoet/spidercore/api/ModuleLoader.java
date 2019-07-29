@@ -1,7 +1,10 @@
 package me.imrandoet.spidercore.api;
 
 import me.imrandoet.spidercore.api.module.IDisableable;
+import me.imrandoet.spidercore.api.module.IEvent;
 import me.imrandoet.spidercore.api.module.Module;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
@@ -32,6 +35,10 @@ public class ModuleLoader<T> {
                 Module module = (Module) clazz.getDeclaredConstructor(javaPlugin.getClass()).newInstance(javaPlugin);
 
                 modules.put(clazz, module);
+
+                if (module instanceof IEvent) {
+                    Bukkit.getPluginManager().registerEvents((IEvent) module, (JavaPlugin) javaPlugin);
+                }
 
             } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException exception) {
                 //Custom logging system
