@@ -4,6 +4,8 @@ import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,6 +33,7 @@ public abstract class Module<T extends JavaPlugin> {
     }
 
     @Target(ElementType.TYPE)
+    @Retention(RetentionPolicy.RUNTIME)
     public @interface ModulePriority {
 
         int priority() default DEFAULT;
