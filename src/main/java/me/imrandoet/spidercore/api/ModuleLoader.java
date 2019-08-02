@@ -38,6 +38,7 @@ public class ModuleLoader<T> {
 
                 module.getEvents().forEach(o -> Bukkit.getPluginManager().registerEvents((Listener) o, (JavaPlugin) javaPlugin));
 
+                module.run();
 //                if (module instanceof IEvent) {
 //                    Bukkit.getPluginManager().registerEvents((IEvent) module, (JavaPlugin) javaPlugin);
 //                }
