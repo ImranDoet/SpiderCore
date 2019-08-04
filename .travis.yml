@@ -6,8 +6,8 @@ cache:
   directories:
     - $HOME/.m2
 
-before_install:
-  - if [ ! -d "$HOME/.m2/repository/org/spigotmc" ]; then ./installSpigot.sh 1.13.2 ; else echo "Not compiling Spigot because it is already in our maven" ; fi
+#before_install:
+#  - if [ ! -d "$HOME/.m2/repository/org/spigotmc" ]; then ./installSpigot.sh 1.13.2 ; else echo "Not compiling Spigot because it is already in our maven" ; fi
 
 install:
   - mvn install -DfinalName=release -DskipTests=true -Dmaven.javadoc.skip=true -B -V
