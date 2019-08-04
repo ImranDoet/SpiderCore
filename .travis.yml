@@ -19,4 +19,4 @@ deploy:
   file: target/release.jar
   skip_cleanup: true
   on:
-    tags: true
+    commits: true
