@@ -18,5 +18,6 @@ deploy:
     secure: nvXzJ1xKVBw40ksws8LOpBtCtgt5omM24kVkyno+bkVkx3WP/pMp0w5GOSFOn2rQOgB6v4St4737boOpPyvNV9FDnoWC2vmdhlwiknKhB+1dOqzJtR6c4ux1X2TMHdjVGoHYFNT+FBwsCQjEDZ3aHo+kdEVzy4Rx8b7T9MxvkODguimNYRGW/2GdLvEzuE900A3bCTDeeGKHZFzod4A3t6Y3w8a9+FBTcNr+M9zHXeG3xCGL4EULjCMcCl7AZbuVpm6/SS/pnxOPG92p5t7EkMRfkBf04Zw4FKbPNeA3C6+ZT8ZfPVoMf6uS5yyjiS5NfrhAifPdmZHH+LqxKuTR4h6SGXMr3c/sZdCOP6zZFkawCOvrQx/LwksrTgtRumvgBgNYvpPCkoe/qmgdmuubvcHfyFSQvXybW7ZajygGwgM7wG/EQvbX9jOLpO+jDmLJ1MYzlrd+1He1sjK9S4xtgISxcZXkbJ7TpbBsxn5DkxSe/Xsko5X3+tUcMtAMYosK+jZ+GkZbxCCA2uv3Xmw12GQafFB3TQ+1v6VyFY7Jfqk/Eo6qrgq1hlwkVL/u71M744IEtemJDVUW0//03fhvI5l5G88ay0FJYUnKAuBXhbX+7++MJIr+MJr7V8s8W4TzGc5MWEIyPphFA3rFBjRpXA+OcQay0NezVAf1B4FN1yQ=
   file: target/release.jar
   skip_cleanup: true
-  on:
-    commits: true
+  branches:
+    only:
+      - develop
