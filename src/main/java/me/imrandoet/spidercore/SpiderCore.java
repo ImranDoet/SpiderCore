@@ -28,18 +28,17 @@ public class SpiderCore {
     public static void disable() {
         if (instance == null) return;
 
-        instance.disableCore();
         instance = null;
     }
 
-    public void disableCore() {
+    public void disableCore(ModuleLoader moduleLoader_) {
         plugin.getLogger().info("Disabled SpiderCore!");
-        moduleLoader.disableModules();
+        moduleLoader_.disableModules();
+        disable();
     }
 
     public <T extends JavaPlugin> ModuleLoader moduleLoader(String package_, T javaPlugin) {
-        this.moduleLoader = new ModuleLoader(javaPlugin, package_);
-        return moduleLoader;
+        return moduleLoader = new ModuleLoader(javaPlugin, package_);
     }
 
     public void enableCore() {

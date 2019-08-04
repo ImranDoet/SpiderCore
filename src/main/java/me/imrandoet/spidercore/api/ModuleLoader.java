@@ -9,47 +9,51 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class ModuleLoader<T> {
 
     private final T javaPlugin;
 
     private final Map<Class, Module> modules;
-    private final LinkedHashMap<Class, Module> sortedModules;
 
     private final String pluginPackage;
 
     public ModuleLoader(T javaPlugin, String pluginPackage) {
         this.javaPlugin = javaPlugin;
         this.modules = new LinkedHashMap<>();
-        this.sortedModules = new LinkedHashMap<>();
         this.pluginPackage = pluginPackage;
-
-        loadModules();
     }
 
-    private void loadModules() {
+    public void loadModules() {
+        LinkedHashMap<Module, Integer> moduleIntegerLinkedHashMap = new LinkedHashMap<>();
         scanForModules(clazz -> {
             try {
                 Module module = (Module) clazz.getDeclaredConstructor(javaPlugin.getClass()).newInstance(javaPlugin);
 
                 modules.put(clazz, module);
+                moduleIntegerLinkedHashMap.put(module, ((ModulePriority) (clazz.getAnnotation(ModulePriority.class))).priority());
 
                 module.getEvents().forEach(o -> Bukkit.getPluginManager().registerEvents((Listener) o, (JavaPlugin) javaPlugin));
-
             } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException exception) {
-                //Custom logging system
                 exception.printStackTrace();
             }
         });
-        modules.entrySet().stream().sorted(Comparator.comparingInt(o -> ((ModulePriority) o.getKey().getAnnotation(ModulePriority.class)).priority())).forEachOrdered(classModuleEntry -> sortedModules.put(classModuleEntry.getKey(), classModuleEntry.getValue()));
 
-        this.sortedModules.entrySet().stream().forEach(classModuleEntry -> classModuleEntry.getValue().run());
+
+        //Start sorting of modules
+        LinkedHashMap<Module, Integer> sorted = moduleIntegerLinkedHashMap.entrySet()
+                .stream()
+                .sorted((Map.Entry.<Module, Integer>comparingByValue().reversed()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        modules.clear();
+        sorted.forEach((module, integer) -> modules.put(module.getClass(), module));
+
+        modules.forEach((key, value) -> value.run());
     }
 
     public void disableModules() {
